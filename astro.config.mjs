@@ -35,7 +35,7 @@ for (const entry of getArticleCatalog()) {
 export default defineConfig({
   integrations: [react()],
   output: 'static',
-  site: 'https://michellelynnsargent.github.io',
+  site: 'https://michellesargent.github.io',
   base: '/',
   redirects: writingRedirects,
   image: {

@@ -4,7 +4,7 @@ export const SITE = {
   description:
     'Accelerating development through intelligent design.',
   headline: 'Intelligence by design',
-  url: 'https://michellelynnsargent.github.io',
+  url: 'https://michellesargent.github.io',
   linkedin: 'https://www.linkedin.com/in/michellelynnsargent',
   github: 'https://github.com/michellelynnsargent',
 } as const;
