@@ -1,0 +1,31 @@
+---
+import { SITE } from '../../lib/site';
+import IconWrap from '../IconWrap.astro';
+
+interface Props {
+  fullWidth?: boolean;
+}
+
+const { fullWidth = false } = Astro.props;
+---
+
+<div class:list={['contact-preview', fullWidth && 'contact-preview-full']}>
+  <p class="section-eyebrow text-label-13-pixel">Contact</p>
+  <h2>Let&apos;s connect</h2>
+  <p>
+    Connect with Michelle on LinkedIn. Open to Design Engineer, UX Engineer, and enterprise product
+    design conversations.
+  </p>
+  <div class="button-row">
+    <a
+      class="button button-primary"
+      href={SITE.linkedin}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <IconWrap name="linkedin" size={16} />
+      LinkedIn
+      <IconWrap name="external" size={14} />
+    </a>
+  </div>
+</div>

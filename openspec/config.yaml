@@ -1,0 +1,16 @@
+schema: spec-driven
+
+context: |
+  Portfolio site for Michelle Sargent — Design Engineer positioning.
+  Stack: Astro 5, TypeScript, static site generation, GitHub Pages.
+  Content source: work/index.yaml + work/case-studies/ + work/articles/ (build-time loader).
+  Access: site-wide password gate (SITE_PASSWORD env var, SHA-256 hash, sessionStorage).
+  Confidential Cisco content: noindex, robots.txt disallow, internal case studies behind auth.
+  Cisco links: classify *.cisco.com and cisco-it-design GitHub org with SSO/VPN badges.
+  Contact: LinkedIn primary; footer has LinkedIn + GitHub. No email or contact form.
+  Deploy: GitHub Actions to michellelynnsargent.github.io (base: '/').
+
+rules:
+  tasks:
+    - Keep implementation scoped to the active OpenSpec change
+    - Mark tasks complete in tasks.md immediately after finishing each one

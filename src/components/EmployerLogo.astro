@@ -1,0 +1,31 @@
+---
+interface Props {
+  srcLight: string;
+  srcDark: string;
+  alt: string;
+  width?: number;
+  height?: number;
+}
+
+const { srcLight, srcDark, alt, width, height } = Astro.props;
+---
+
+<span class="employer-logo">
+  <img
+    class="employer-logo-light"
+    src={srcLight}
+    alt={alt}
+    width={width}
+    height={height}
+    decoding="async"
+  />
+  <img
+    class="employer-logo-dark"
+    src={srcDark}
+    alt=""
+    width={width}
+    height={height}
+    decoding="async"
+    aria-hidden="true"
+  />
+</span>

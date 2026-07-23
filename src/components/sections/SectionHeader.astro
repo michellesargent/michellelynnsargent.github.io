@@ -1,0 +1,26 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  subtitle?: string;
+  centered?: boolean;
+}
+
+const { eyebrow, title, subtitle, centered = false } = Astro.props;
+---
+
+<div class:list={['section-header', { 'section-header-centered': centered }]}>
+  <p class="section-eyebrow text-label-13-pixel">{eyebrow}</p>
+  <h2>{title}</h2>
+  {subtitle && <p>{subtitle}</p>}
+</div>
+
+<style>
+  .section-header-centered {
+    text-align: center;
+  }
+
+  .section-header-centered p:last-child {
+    margin-inline: auto;
+  }
+</style>

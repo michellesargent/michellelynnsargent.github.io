@@ -1,0 +1,29 @@
+title: AI Design Workflow
+slug: ai-design-workflow
+featured: false
+visibility: internal
+date_start: "2025-12"
+date_end: null
+organization: Cisco
+role: Design Engineer
+tags:
+  - github
+  - version-control
+  - information-architecture
+  - pencil
+  - figma
+  - mcp
+  - cursor
+  - agent-skills
+links:
+  live: ""
+  repo: ""
+portfolio_themes:
+  - design-engineer
+  - ai-native-workflow
+assets:
+  gallery:
+    - src: assets/prototyping-figma-lofi.png
+      alt: "Lo-fi prototypes in IDE using Pencil.dev"
+    - src: assets/prototyping-pencil-figma.png
+      alt: "Exported Pencil files to Figma for team explorations"

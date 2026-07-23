@@ -1,0 +1,27 @@
+---
+import Icon from './Icon';
+import type { IconName } from '../lib/icons';
+
+interface Props {
+  name: IconName;
+  size?: number;
+  class?: string;
+  label?: string;
+}
+
+const { name, size = 16, class: className, label } = Astro.props;
+---
+
+<span class:list={['icon-wrap', className]}>
+  <Icon name={name} size={size} aria-label={label} />
+</span>
+
+<style>
+  .icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    flex-shrink: 0;
+  }
+</style>

@@ -1,0 +1,192 @@
+/*
+ * Geist Design System tokens
+ *
+ * Sources:
+ * - Colors: https://vercel.com/geist/colors.md
+ * - Typography: https://vercel.com/geist/typography.md
+ * - Materials: https://vercel.com/geist/materials.md
+ * - Light theme: https://vercel.com/design.md
+ * - Dark theme: https://vercel.com/design.dark.md
+ */
+
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+
+  /* Typography */
+  --font-sans: 'Geist Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', monospace;
+  --font-pixel: 'Geist Pixel Square', var(--font-mono);
+  --font-body: var(--font-sans);
+
+  /* Backgrounds */
+  --ds-background-100: #ffffff;
+  --ds-background-200: #fafafa;
+
+  /* Gray scale */
+  --ds-gray-100: #fafafa;
+  --ds-gray-200: #f5f5f5;
+  --ds-gray-300: #eeeeee;
+  --ds-gray-400: #ebebeb;
+  --ds-gray-500: #e0e0e0;
+  --ds-gray-600: #c4c4c4;
+  --ds-gray-700: #8f8f8f;
+  --ds-gray-800: #666666;
+  --ds-gray-900: #4d4d4d;
+  --ds-gray-1000: #171717;
+
+  /* Blue accent */
+  --ds-blue-100: #ebf5ff;
+  --ds-blue-700: #0070f3;
+  --ds-blue-900: #006bff;
+  --ds-blue-1000: #0061d5;
+
+  /* Semantic */
+  --ds-red-700: #e5484d;
+
+  /* Materials, radii */
+  --radius-base: 6px;
+  --radius-medium: 12px;
+  --radius-large: 16px;
+  --radius-pill: 9999px;
+
+  /* Materials, shadows */
+  --shadow-border: 0 0 0 1px rgb(0 0 0 / 0.08);
+  --shadow-switcher-active: 0 0 0 1px var(--ds-gray-400), 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  --shadow-raised: 0 2px 2px rgb(0 0 0 / 0.04);
+  --shadow-menu: 0 0 0 1px rgb(0 0 0 / 0.08), 0 1px 1px rgb(0 0 0 / 0.02),
+    0 4px 8px -4px rgb(0 0 0 / 0.04), 0 16px 24px -8px rgb(0 0 0 / 0.06);
+  --shadow-modal: 0 1px 1px rgb(0 0 0 / 0.02), 0 8px 16px -4px rgb(0 0 0 / 0.04),
+    0 24px 32px -8px rgb(0 0 0 / 0.06);
+
+  /* Legacy aliases */
+  --color-bg: var(--ds-background-200);
+  --color-bg-elevated: var(--ds-background-100);
+  --color-text: var(--ds-gray-1000);
+  --color-text-muted: var(--ds-gray-900);
+  --color-border: var(--ds-gray-400);
+  --color-grid-border: var(--ds-gray-400);
+  --color-eyebrow: var(--ds-gray-700);
+  --color-accent: var(--ds-blue-700);
+  --color-accent-hover: var(--ds-blue-1000);
+  --color-accent-soft: var(--ds-blue-100);
+  --color-error: var(--ds-red-700);
+  --color-focus: var(--ds-blue-700);
+  --color-hero-dot: var(--ds-gray-600);
+
+  --radius-sm: var(--radius-base);
+  --radius-md: var(--radius-medium);
+  --radius-lg: var(--radius-medium);
+
+  --shadow-sm: var(--shadow-raised);
+  --shadow-md: var(--shadow-menu);
+
+  /* Card hover glow */
+  --glow-purple: #7928ca;
+  --glow-blue: #0070f3;
+  --shadow-card-glow:
+    0 0 0 1px color-mix(in srgb, var(--glow-purple) 28%, var(--glow-blue) 72%),
+    0 4px 20px -4px color-mix(in srgb, var(--glow-purple) 38%, transparent),
+    0 8px 36px -8px color-mix(in srgb, var(--glow-blue) 32%, transparent);
+
+  /* Spacing (4px scale) */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+
+  --max-prose: 45rem;
+  --max-content: 72rem;
+
+  --motion-fast: 150ms cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  --motion-medium: 200ms cubic-bezier(0.175, 0.885, 0.32, 1.1);
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --ds-background-100: #0a0a0a;
+  --ds-background-200: #171717;
+
+  --ds-gray-100: #171717;
+  --ds-gray-200: #1f1f1f;
+  --ds-gray-300: #292929;
+  --ds-gray-400: #333333;
+  --ds-gray-500: #444444;
+  --ds-gray-600: #525252;
+  --ds-gray-700: #737373;
+  --ds-gray-800: #8f8f8f;
+  --ds-gray-900: #a1a1a1;
+  --ds-gray-1000: #ededed;
+
+  --ds-blue-100: #0d2847;
+  --ds-blue-700: #0070f3;
+  --ds-blue-900: #47a8ff;
+  --ds-blue-1000: #76baff;
+
+  --shadow-border: 0 0 0 1px rgb(255 255 255 / 0.145), 0 0 0 1px rgb(0 0 0 / 1);
+  --shadow-switcher-active: 0 0 0 1px var(--ds-gray-400), 0 1px 2px 0 rgb(0 0 0 / 0.16);
+  --shadow-raised: 0 1px 2px rgb(0 0 0 / 0.16);
+  --shadow-menu: 0 1px 1px rgb(0 0 0 / 0.02), 0 4px 8px -4px rgb(0 0 0 / 0.04),
+    0 16px 24px -8px rgb(0 0 0 / 0.06);
+  --shadow-modal: 0 1px 1px rgb(0 0 0 / 0.02), 0 8px 16px -4px rgb(0 0 0 / 0.04),
+    0 24px 32px -8px rgb(0 0 0 / 0.06);
+
+  --color-hero-dot: var(--ds-gray-500);
+
+  --shadow-card-glow:
+    0 0 0 1px color-mix(in srgb, var(--glow-purple) 40%, var(--glow-blue) 60%),
+    0 4px 24px -4px color-mix(in srgb, var(--glow-purple) 50%, transparent),
+    0 8px 40px -8px color-mix(in srgb, var(--glow-blue) 45%, transparent);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']):not([data-theme='dark']),
+  :root[data-theme='system'] {
+    color-scheme: dark;
+
+    --ds-background-100: #0a0a0a;
+    --ds-background-200: #171717;
+
+    --ds-gray-100: #171717;
+    --ds-gray-200: #1f1f1f;
+    --ds-gray-300: #292929;
+    --ds-gray-400: #333333;
+    --ds-gray-500: #444444;
+    --ds-gray-600: #525252;
+    --ds-gray-700: #737373;
+    --ds-gray-800: #8f8f8f;
+    --ds-gray-900: #a1a1a1;
+    --ds-gray-1000: #ededed;
+
+    --ds-blue-100: #0d2847;
+    --ds-blue-700: #0070f3;
+    --ds-blue-900: #47a8ff;
+    --ds-blue-1000: #76baff;
+
+    --shadow-border: 0 0 0 1px rgb(255 255 255 / 0.145), 0 0 0 1px rgb(0 0 0 / 1);
+    --shadow-switcher-active: 0 0 0 1px var(--ds-gray-400), 0 1px 2px 0 rgb(0 0 0 / 0.16);
+    --shadow-raised: 0 1px 2px rgb(0 0 0 / 0.16);
+    --shadow-menu: 0 1px 1px rgb(0 0 0 / 0.02), 0 4px 8px -4px rgb(0 0 0 / 0.04),
+      0 16px 24px -8px rgb(0 0 0 / 0.06);
+    --shadow-modal: 0 1px 1px rgb(0 0 0 / 0.02), 0 8px 16px -4px rgb(0 0 0 / 0.04),
+      0 24px 32px -8px rgb(0 0 0 / 0.06);
+
+    --color-hero-dot: var(--ds-gray-500);
+
+    --shadow-card-glow:
+      0 0 0 1px color-mix(in srgb, var(--glow-purple) 40%, var(--glow-blue) 60%),
+      0 4px 24px -4px color-mix(in srgb, var(--glow-purple) 50%, transparent),
+      0 8px 40px -8px color-mix(in srgb, var(--glow-blue) 45%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0ms;
+    --motion-medium: 0ms;
+  }
+}

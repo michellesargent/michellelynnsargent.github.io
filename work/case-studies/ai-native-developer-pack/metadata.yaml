@@ -1,0 +1,20 @@
+title: AI-Native Developer Pack
+slug: ai-native-developer-pack
+featured: true
+visibility: internal
+date_start: "2026-06"
+date_end: "2026-07"
+organization: Cisco
+role: Senior Product Designer
+tags:
+  - ai-native
+  - ide
+  - poc
+  - onboarding
+links:
+  live: ""
+  repo: cisco-it-design/ai-native-developer-pack
+portfolio_themes:
+  - design-technologist
+  - design-engineer
+  - enterprise-systems

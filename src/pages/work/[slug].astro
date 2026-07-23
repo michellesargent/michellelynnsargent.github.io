@@ -1,0 +1,19 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import { getAllCaseStudies, getCaseStudy } from '../../lib/content/loader';
+
+export function getStaticPaths() {
+  return getAllCaseStudies().map((study) => ({
+    params: { slug: study.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const caseStudy = getCaseStudy(slug!);
+
+if (!caseStudy) {
+  return Astro.redirect('/404');
+}
+---
+
+<CaseStudyLayout caseStudy={caseStudy} />

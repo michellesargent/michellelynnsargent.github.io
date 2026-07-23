@@ -1,0 +1,29 @@
+title: Design System Engineering
+slug: design-system-theming
+featured: false
+visibility: internal
+date_start: "2025-11"
+date_end: "2026-04"
+organization: Cisco
+role: Design Engineer
+tags:
+  - atmosphere
+  - cdsi
+  - ocdl
+  - theming
+  - figma-plugins
+  - enablement
+  - openspec
+links:
+  live: ""
+  repo: ""
+portfolio_themes:
+  - ux-engineer
+  - enterprise-systems
+assets:
+  alt: "Atmosphere OCDL pull requests and SCSS theming diff in GitHub Desktop"
+  gallery:
+    - src: assets/prototyping-figma-lofi.png
+      alt: "How Fast do they Ship? Jira ticket cycle time for S17—6.5 day average for Jarod and Michelle"
+    - src: assets/prototyping-pencil-figma.png
+      alt: "Supportive GitHub PR reviews from engineering—encouragement and coaching that helped designers grow in version control"

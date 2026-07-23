@@ -1,0 +1,20 @@
+title: UX Enablement Platform
+slug: uxep-platform
+featured: true
+visibility: internal
+date_start: "2026-02"
+date_end: "2026-05"
+organization: Cisco
+role: Senior Product Designer
+tags:
+  - design-systems
+  - platform
+  - open-spec
+  - analytics
+links:
+  live: ""
+  repo: cisco-it-design/uxep-site
+portfolio_themes:
+  - design-engineer
+  - ux-engineer
+  - enterprise-systems

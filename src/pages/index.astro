@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/sections/SectionHeader.astro';
+import CapabilityGrid from '../components/sections/CapabilityGrid.astro';
+import MasonryGallery from '../components/sections/MasonryGallery.astro';
+import TeachingThumbnails from '../components/sections/TeachingThumbnails.astro';
+import ResumeCallout from '../components/sections/ResumeCallout.astro';
+import ContactCTA from '../components/sections/ContactCTA.astro';
+import HeroTitle from '../components/HeroTitle.astro';
+import IconWrap from '../components/IconWrap.astro';
+import { getFeatured } from '../lib/content/catalog';
+import { getCaseStudy, getArticle, getAllCaseStudies } from '../lib/content/loader';
+import type { CaseStudy } from '../lib/content/types';
+import { SITE } from '../lib/site';
+
+const { caseStudies: featuredCatalog, articles: featuredCatalogArticles } = getFeatured();
+
+const featuredCaseStudies = featuredCatalog
+  .map((entry) => getCaseStudy(entry.slug))
+  .filter(Boolean);
+
+const masonryStudies: CaseStudy[] =
+  featuredCaseStudies.length > 0
+    ? featuredCaseStudies.filter((study): study is CaseStudy => study !== null)
+    : getAllCaseStudies().slice(0, 6);
+
+const featuredArticles = featuredCatalogArticles
+  .map((entry) => getArticle(entry.slug))
+  .filter(Boolean)
+  .slice(0, 4);
+---
+
+<BaseLayout>
+  <section class="hero hero-dotted">
+    <div class="container">
+      <div class="hero-content">
+        <p class="hero-eyebrow text-label-13-pixel">{SITE.tagline}</p>
+        <HeroTitle text={SITE.title} />
+        <p class="hero-lead text-copy-16">{SITE.description}</p>
+        <p class="hero-secondary text-copy-16">
+          Bringing together enterprise systems depth, AI-native workflows, and human user
+          experiences to deliver design and production-ready code in parallel.
+        </p>
+        <div class="button-row">
+          <a class="button button-primary" href="/work">
+            View work
+            <IconWrap name="arrow-right" size={16} />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <SectionHeader
+      eyebrow="Expertise"
+      title="Core capabilities"
+      subtitle="Michelle's core capabilities: enterprise scale, AI-native workflow, and teaching differentiation."
+    />
+    <CapabilityGrid />
+  </section>
+
+  <section class="section container">
+    <SectionHeader
+      eyebrow="Work"
+      title="High-impact project work"
+      subtitle="Michelle's shipped platforms, POCs, and design system contributions, including internal Cisco work."
+    />
+    <MasonryGallery items={masonryStudies} layout="halves" />
+    <p style="margin-top: var(--space-lg);">
+      <a class="inline-link" href="/work">
+        View all work
+        <IconWrap name="arrow-right" size={14} />
+      </a>
+    </p>
+  </section>
+
+  <section class="section container">
+    <SectionHeader
+      eyebrow="Teaching"
+      title="Workshops and presentations"
+      subtitle="Michelle's workshops: Session Zero onboarding, GitHub Copilot for researchers, and AI journey map pipelines."
+    />
+    {
+      featuredArticles.length > 0 ? (
+        <>
+          <TeachingThumbnails articles={featuredArticles} />
+          <p style="margin-top: var(--space-lg);">
+            <a class="inline-link" href="/teaching">
+              View all teaching
+              <IconWrap name="arrow-right" size={14} />
+            </a>
+          </p>
+        </>
+      ) : (
+        <p>
+          Teaching articles coming soon. <a href="/teaching">Browse teaching →</a>
+        </p>
+      )
+    }
+  </section>
+
+  <section class="section container">
+    <ResumeCallout />
+  </section>
+
+  <section class="section section-full-bleed">
+    <ContactCTA fullWidth />
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-content {
+    padding-block: var(--space-xl);
+  }
+</style>

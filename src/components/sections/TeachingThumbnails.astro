@@ -1,0 +1,46 @@
+---
+import type { Article } from '../../lib/content/types';
+import { getThumbnailUrl } from '../../lib/content/thumbnails';
+
+interface Props {
+  articles: Article[];
+}
+
+const { articles } = Astro.props;
+
+function formatDate(date: string): string {
+  return new Date(date).toLocaleDateString('en-US', {
+    month: 'long',
+    year: 'numeric',
+  });
+}
+---
+
+<div class="teaching-grid">
+  {
+    articles.map((article) => (
+      <a class="teaching-card material-menu" href={`/teaching/${article.slug}`}>
+        {
+          article.thumbnail ? (
+            <div class="teaching-card-media">
+              <img
+                src={getThumbnailUrl(article.thumbnail)}
+                alt={article.thumbnailAlt ?? article.title}
+                loading="lazy"
+              />
+            </div>
+          ) : (
+            <div class="teaching-card-media teaching-card-fallback">
+              <span>{article.title.slice(0, 1)}</span>
+            </div>
+          )
+        }
+        <div class="teaching-card-body">
+          <p class="teaching-card-date">{formatDate(article.date)}</p>
+          <h3>{article.title}</h3>
+          <p>{article.excerpt}</p>
+        </div>
+      </a>
+    ))
+  }
+</div>

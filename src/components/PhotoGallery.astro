@@ -1,0 +1,177 @@
+---
+export interface GalleryImage {
+  src: string;
+  alt: string;
+}
+
+interface Props {
+  images: GalleryImage[];
+  label?: string;
+}
+
+const { images, label = 'Photo gallery' } = Astro.props;
+const galleryId = `gallery-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<div class="photo-gallery" role="group" aria-label={label}>
+  {
+    images.map((image, index) => (
+      <button
+        type="button"
+        class="photo-gallery-item"
+        data-gallery={galleryId}
+        data-index={index}
+        aria-label={`View larger: ${image.alt}`}
+      >
+        <img src={image.src} alt={image.alt} loading={index < 2 ? 'eager' : 'lazy'} />
+      </button>
+    ))
+  }
+</div>
+
+<dialog class="photo-gallery-lightbox" id={`${galleryId}-lightbox`} aria-label="Expanded photo">
+  <button type="button" class="photo-gallery-close" aria-label="Close">×</button>
+  <figure class="photo-gallery-figure">
+    <img src="" alt="" />
+    <figcaption></figcaption>
+  </figure>
+</dialog>
+
+<script>
+  function initGallery(root: HTMLElement) {
+    const galleryId = root.querySelector('[data-gallery]')?.getAttribute('data-gallery');
+    if (!galleryId) return;
+
+    const dialog = document.getElementById(`${galleryId}-lightbox`) as HTMLDialogElement | null;
+    const figureImg = dialog?.querySelector('img');
+    const figureCaption = dialog?.querySelector('figcaption');
+    const closeBtn = dialog?.querySelector('.photo-gallery-close');
+    const items = Array.from(root.querySelectorAll<HTMLButtonElement>('.photo-gallery-item'));
+
+    if (!dialog || !figureImg || !figureCaption || !closeBtn) return;
+
+    const open = (index: number) => {
+      const item = items[index];
+      const img = item?.querySelector('img');
+      if (!img) return;
+
+      figureImg.src = img.src;
+      figureImg.alt = img.alt;
+      figureCaption.textContent = img.alt;
+      dialog.showModal();
+    };
+
+    items.forEach((item, index) => {
+      item.addEventListener('click', () => open(index));
+    });
+
+    closeBtn.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('cancel', () => dialog.close());
+  }
+
+  document.querySelectorAll('.photo-gallery').forEach((gallery) => {
+    if (gallery instanceof HTMLElement) initGallery(gallery);
+  });
+</script>
+
+<style>
+  .photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-sm);
+    margin: 0 0 1.5rem;
+  }
+
+  .photo-gallery-item {
+    appearance: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    cursor: zoom-in;
+    border-radius: var(--radius-medium);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--motion-fast), box-shadow var(--motion-fast);
+  }
+
+  .photo-gallery-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .photo-gallery-item:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .photo-gallery-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .photo-gallery-lightbox {
+    width: min(92vw, 56rem);
+    max-height: 90vh;
+    padding: 0;
+    border: none;
+    border-radius: var(--radius-medium);
+    background: var(--ds-background-100);
+    box-shadow: var(--shadow-modal);
+  }
+
+  .photo-gallery-lightbox::backdrop {
+    background: rgb(0 0 0 / 0.72);
+  }
+
+  .photo-gallery-close {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    z-index: 1;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: var(--ds-gray-1000);
+    color: var(--ds-background-100);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .photo-gallery-figure {
+    margin: 0;
+  }
+
+  .photo-gallery-figure img {
+    display: block;
+    width: 100%;
+    max-height: calc(90vh - 4rem);
+    object-fit: contain;
+    margin: 0;
+    border-radius: var(--radius-medium) var(--radius-medium) 0 0;
+  }
+
+  .photo-gallery-figure figcaption {
+    padding: var(--space-md);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 40rem) {
+    .photo-gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

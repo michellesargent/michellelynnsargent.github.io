@@ -1,0 +1,36 @@
+title: "From Transcripts to Miro: A Human-in-the-Loop AI Journey Map Pipeline"
+slug: ai-journey-map-pipeline
+featured: true
+visibility: public
+date: "2026-06-23"
+organization: Cisco
+role: Workshop facilitator / pipeline author
+audience: UX researchers, workshop facilitators, product and design teams
+tags:
+  - teaching
+  - ai-workflow
+  - journey-mapping
+  - mcp
+  - human-in-the-loop
+  - ux-research
+portfolio_themes:
+  - design-engineer
+  - ai-native-workflow
+related_case_studies:
+  - ai-design-workflow
+related_supporting:
+  - enablement-workshops
+co_facilitators:
+  - Victoria Tam
+  - Qiwen Zhao
+related_articles:
+  - session-zero-ai-development-foundation
+source_material:
+  - Workshop VTT transcript (Matt's team meeting, Jun 2026)
+  - AI Journey Map Pipeline repository
+links:
+  article: null
+  linkedin: null
+assets:
+  thumbnail: assets/thumbnail.png
+  alt: "Journey Map Pipeline: GitHub repo and Miro board showing persona and journey map output from transcripts"

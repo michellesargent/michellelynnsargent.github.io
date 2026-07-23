@@ -1,0 +1,53 @@
+---
+import AuthGate from '../components/AuthGate.astro';
+import ClickSpark from '../components/ClickSpark.astro';
+import Footer from '../components/Footer.astro';
+import Nav from '../components/Nav.astro';
+import { SITE } from '../lib/site';
+import '../styles/fonts.css';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = SITE.title,
+  description = SITE.description,
+} = Astro.props;
+
+const pageTitle = title === SITE.title ? title : `${title} · ${SITE.title}`;
+---
+
+<!doctype html>
+<html lang="en" data-theme="system">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{pageTitle}</title>
+    <script is:inline>
+      (function () {
+        var key = 'portfolio-theme';
+        var stored = localStorage.getItem(key);
+        var theme = stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'system';
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <AuthGate>
+      <a class="skip-link" href="#main-content">Skip to content</a>
+      <Nav currentPath={Astro.url.pathname} />
+      <main id="main-content">
+        <slot />
+      </main>
+      <Footer />
+    </AuthGate>
+    <ClickSpark />
+  </body>
+</html>

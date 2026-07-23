@@ -1,0 +1,12 @@
+---
+import HeroTitleReact from './HeroTitle';
+
+interface Props {
+  text: string;
+  className?: string;
+}
+
+const { text, className = 'text-heading-48' } = Astro.props;
+---
+
+<HeroTitleReact client:visible text={text} className={className} />

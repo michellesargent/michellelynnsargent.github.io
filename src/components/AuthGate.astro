@@ -1,0 +1,92 @@
+---
+import IconWrap from './IconWrap.astro';
+
+const passwordHash = import.meta.env.PUBLIC_PASSWORD_HASH;
+const storageKey = 'portfolio-auth';
+---
+
+<div id="auth-gate-root">
+  <div id="auth-login" class="auth-gate hero-dotted">
+    <div class="auth-card">
+      <IconWrap name="lock" size={24} class="auth-icon" label="Locked" />
+      <h1>Portfolio access required</h1>
+      <p>Michelle's portfolio contains confidential work. Enter the shared password to continue.</p>
+      <form id="auth-form">
+        <label for="auth-password">Password</label>
+        <input
+          id="auth-password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          required
+        />
+        <button type="submit">Enter</button>
+        <p id="auth-error" class="auth-error" role="alert" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+  <div id="auth-content" class="hidden">
+    <slot />
+  </div>
+</div>
+
+<script is:inline define:vars={{ passwordHash, storageKey }}>
+  async function hashPassword(value) {
+    const data = new TextEncoder().encode(value);
+    const digest = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(digest))
+      .map((byte) => byte.toString(16).padStart(2, '0'))
+      .join('');
+  }
+
+  function showContent() {
+    document.getElementById('auth-login')?.classList.add('hidden');
+    document.getElementById('auth-content')?.classList.remove('hidden');
+  }
+
+  function showLogin() {
+    document.getElementById('auth-login')?.classList.remove('hidden');
+    document.getElementById('auth-content')?.classList.add('hidden');
+  }
+
+  if (sessionStorage.getItem(storageKey) === passwordHash) {
+    showContent();
+  } else {
+    showLogin();
+  }
+
+  document.querySelector('.auth-card')?.addEventListener('animationend', (event) => {
+    if (event.target instanceof HTMLElement && event.target.classList.contains('shake')) {
+      event.target.classList.remove('shake');
+    }
+  });
+
+  document.getElementById('auth-form')?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const input = document.getElementById('auth-password');
+    const error = document.getElementById('auth-error');
+    const value = input instanceof HTMLInputElement ? input.value : '';
+
+    const hash = await hashPassword(value);
+    if (hash === passwordHash) {
+      sessionStorage.setItem(storageKey, hash);
+      error.textContent = '';
+      showContent();
+      return;
+    }
+
+    error.textContent = 'Incorrect password. Please try again.';
+
+    const card = document.querySelector('.auth-card');
+    if (card) {
+      card.classList.remove('shake');
+      void card.offsetWidth;
+      card.classList.add('shake');
+    }
+
+    if (input instanceof HTMLInputElement) {
+      input.value = '';
+      input.focus();
+    }
+  });
+</script>

@@ -1,0 +1,12 @@
+---
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<span class="internal-ref">
+  {label}
+  <span class="access-label">Internal reference</span>
+</span>

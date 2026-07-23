@@ -1,0 +1,119 @@
+---
+import { TESTIMONIALS } from '../../lib/content/testimonials';
+import IconWrap from '../IconWrap.astro';
+
+interface Props {
+  testimonials?: typeof TESTIMONIALS;
+}
+
+const { testimonials = TESTIMONIALS } = Astro.props;
+---
+
+{
+  testimonials.length > 0 && (
+    <div class="testimonial-carousel" data-testimonial-carousel>
+      <div class="testimonial-carousel-viewport">
+        <div class="testimonial-carousel-track" data-carousel-track>
+          {
+            testimonials.map((item, index) => (
+              <figure
+                class="testimonial-block testimonial-slide"
+                data-carousel-slide
+                data-index={index}
+                hidden={index !== 0}
+              >
+                <blockquote>&ldquo;{item.quote}&rdquo;</blockquote>
+                <figcaption class="testimonial-cite">
+                  <strong>{item.author}</strong>: {item.context}
+                </figcaption>
+              </figure>
+            ))
+          }
+        </div>
+      </div>
+
+      {
+        testimonials.length > 1 && (
+          <div class="testimonial-carousel-controls">
+            <button
+              type="button"
+              class="carousel-button"
+              data-carousel-prev
+              aria-label="Previous quote"
+            >
+              <IconWrap name="chevron-left" size={18} />
+            </button>
+
+            <div class="testimonial-carousel-dots" role="tablist" aria-label="Quote navigation">
+              {
+                testimonials.map((_, index) => (
+                  <button
+                    type="button"
+                    class="carousel-dot"
+                    role="tab"
+                    data-carousel-dot
+                    data-index={index}
+                    aria-label={`Go to quote ${index + 1}`}
+                    aria-selected={index === 0 ? 'true' : 'false'}
+                  />
+                ))
+              }
+            </div>
+
+            <button
+              type="button"
+              class="carousel-button"
+              data-carousel-next
+              aria-label="Next quote"
+            >
+              <IconWrap name="chevron-right" size={18} />
+            </button>
+          </div>
+        )
+      }
+    </div>
+  )
+}
+
+<script>
+  function initTestimonialCarousels() {
+    document.querySelectorAll('[data-testimonial-carousel]').forEach((root) => {
+      if (root.getAttribute('data-carousel-initialized') === 'true') return;
+      root.setAttribute('data-carousel-initialized', 'true');
+
+      const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-carousel-slide]'));
+      const dots = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-carousel-dot]'));
+      const prev = root.querySelector<HTMLButtonElement>('[data-carousel-prev]');
+      const next = root.querySelector<HTMLButtonElement>('[data-carousel-next]');
+
+      if (slides.length <= 1) return;
+
+      let activeIndex = 0;
+
+      const showSlide = (index: number) => {
+        activeIndex = (index + slides.length) % slides.length;
+
+        slides.forEach((slide, slideIndex) => {
+          slide.hidden = slideIndex !== activeIndex;
+        });
+
+        dots.forEach((dot, dotIndex) => {
+          dot.setAttribute('aria-selected', String(dotIndex === activeIndex));
+        });
+      };
+
+      prev?.addEventListener('click', () => showSlide(activeIndex - 1));
+      next?.addEventListener('click', () => showSlide(activeIndex + 1));
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const index = Number(dot.dataset.index);
+          if (!Number.isNaN(index)) showSlide(index);
+        });
+      });
+    });
+  }
+
+  initTestimonialCarousels();
+  document.addEventListener('astro:page-load', initTestimonialCarousels);
+</script>

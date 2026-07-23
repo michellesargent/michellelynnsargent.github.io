@@ -1,0 +1,37 @@
+title: "Beyond the Vibes: Owning Your Design Portfolio"
+slug: beyond-the-vibes-design-portfolio
+featured: false
+visibility: public
+date: "2025-07"
+organization: Cisco
+role: dzone NYC organizer / workshop presenter
+audience: UX designers building or refreshing a portfolio
+tags:
+  - teaching
+  - portfolio
+  - design-engineer
+  - local-development
+  - career
+  - workshop-facilitation
+portfolio_themes:
+  - design-engineer
+related_case_studies:
+  - ai-design-workflow
+related_drafts:
+  - portfolio-site
+source_material:
+  - LinkedIn post (dzone 2025 NYC)
+links:
+  linkedin: https://www.linkedin.com/feed/update/urn:li:activity:7384241189971025920/
+assets:
+  thumbnail: assets/thumbnail.png
+  alt: "dzone workshop: facilitator guiding participants editing prompts on laptops during a hands-on session"
+  gallery:
+    - src: assets/gallery-01.jpg
+      alt: "dzone NYC workshop: hands-on session editing prompts with participants"
+    - src: assets/gallery-02.jpg
+      alt: "dzone NYC workshop: presenting Beyond the Vibes with slides on screen"
+    - src: assets/gallery-03.jpg
+      alt: "dzone NYC workshop: wide view of participants collaborating at round tables"
+    - src: assets/gallery-04.jpg
+      alt: "dzone NYC welcome display with Cisco branding and flowers"

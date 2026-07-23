@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/sections/SectionHeader.astro';
+import StatCards from '../components/sections/StatCards.astro';
+import CapabilityGrid from '../components/sections/CapabilityGrid.astro';
+import IconWrap from '../components/IconWrap.astro';
+import { AI_NATIVE_FUNDAMENTALS } from '../lib/content/ai-native-fundamentals';
+import { SITE } from '../lib/site';
+---
+
+<BaseLayout
+  title="About"
+  description="Michelle Sargent: Design Engineer with enterprise systems depth, AI-native workflows, and teaching expertise."
+>
+  <section class="container section">
+    <div class="about-columns">
+      <div>
+        <SectionHeader
+          eyebrow="About"
+          title={SITE.headline}
+          subtitle="Operating as a hybrid has its advantages."
+        />
+        <div class="prose">
+          <p>
+            I work where design intent meets shipped software: information architecture and
+            high-fidelity design, OpenSpec-driven builds, Figma-to-code fidelity, and the
+            enablement programs that help teams adopt AI-native workflows. My unfair advantage is
+            Fortune 100 design-system depth plus hands-on teaching: not just building tools, but
+            getting people through the door to use them.
+          </p>
+          <p>
+            Design Engineer is my primary identity. I own outcomes from design through production.
+            Ship with craft, skip handoff, iterate in Figma or code. Enterprise credibility comes
+            from Cisco-scale complexity; startup energy comes from AI-native speed and artifact-forward
+            delivery.
+          </p>
+        </div>
+        <p style="margin-top: var(--space-lg);">
+          <a
+            class="button button-secondary"
+            href={SITE.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Get in touch →
+          </a>
+        </p>
+      </div>
+      <StatCards />
+    </div>
+  </section>
+
+  <section class="section section-full-bleed">
+    <div class="contact-preview contact-preview-full">
+      <p class="section-eyebrow text-label-13-pixel">Framing</p>
+      <h2>Expertise framing</h2>
+      <div class="skills-grid framing-grid">
+        <div>
+          <IconWrap name="code-bracket" size={32} class="framing-icon" label="Design Engineer" />
+          <h3>Design Engineer</h3>
+          <p>
+            Primary identity: own outcomes from design through production. Ship with craft, skip
+            handoff, iterate in Figma or code, with pixel-perfect implementation, performance, and
+            accessibility built in.
+          </p>
+        </div>
+        <div>
+          <IconWrap name="arrows-right-left" size={32} class="framing-icon" label="UX Engineer" />
+          <h3>UX Engineer</h3>
+          <p>
+            Bridge disciplines with reusable components, research prototypes, and translation between
+            design and engineering, including collaborative PR review and visual QA in GitHub with
+            engineering partners.
+          </p>
+        </div>
+        <div>
+          <IconWrap name="beaker" size={32} class="framing-icon" label="Design Technologist" />
+          <h3>Design Technologist</h3>
+          <p>
+            Prove ambitious ideas through functional demos and 0→1 validation before engineering
+            commits by building interactive prototypes that make ambitious concepts tangible and
+            influence product direction.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section">
+    <section class="section-block">
+      <SectionHeader eyebrow="AI-native" title="Fundamental knowledge" />
+      <p class="prose-note fundamentals-intro">
+        The stack I teach and build with: structure that makes AI-assisted work repeatable,
+        reviewable, and safe for enterprise teams.
+      </p>
+      <CapabilityGrid items={AI_NATIVE_FUNDAMENTALS} />
+    </section>
+  </section>
+</BaseLayout>
+
+<style>
+  .section-block {
+    margin-top: var(--space-2xl);
+    max-width: var(--max-content);
+  }
+
+  .framing-grid {
+    margin-top: var(--space-xl);
+    max-width: var(--max-content);
+    margin-inline: auto;
+    text-align: left;
+  }
+
+  .framing-grid :global(.framing-icon) {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    margin-bottom: var(--space-md);
+    color: var(--color-eyebrow);
+  }
+
+  .framing-grid :global(.framing-icon svg) {
+    width: 20px;
+    height: 20px;
+  }
+
+  .framing-grid p {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .prose-note {
+    color: var(--color-text-muted);
+    max-width: var(--max-prose);
+  }
+
+  .fundamentals-intro {
+    margin: 0 0 var(--space-lg);
+  }
+</style>

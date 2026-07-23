@@ -1,0 +1,19 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { getAllArticles, getArticle } from '../../lib/content/loader';
+
+export function getStaticPaths() {
+  return getAllArticles().map((article) => ({
+    params: { slug: article.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const article = getArticle(slug!);
+
+if (!article) {
+  return Astro.redirect('/404');
+}
+---
+
+<ArticleLayout article={article} />

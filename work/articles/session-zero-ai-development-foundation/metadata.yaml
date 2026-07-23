@@ -1,0 +1,35 @@
+title: "Session Zero: AI Development Foundations for First-Time IDE Users"
+slug: session-zero-ai-development-foundation
+featured: true
+visibility: public
+date: "2026-04-29"
+organization: Cisco
+role: Session co-designer / presenter
+audience: Designers and researchers with no prior IDE experience
+tags:
+  - teaching
+  - onboarding
+  - github-copilot
+  - vscode
+  - enablement
+  - ai-development
+portfolio_themes:
+  - design-engineer
+  - ai-native-workflow
+related_case_studies:
+  - ai-design-workflow
+related_articles:
+  - researchers-meet-github-copilot
+  - ai-journey-map-pipeline
+  - beyond-figma-make-version-control
+related_supporting:
+  - enablement-workshops
+co_presenters:
+  - Caroline Miller
+source_material:
+  - Session-0 Getting Started deck (Apr 2026, internal: used as writing reference)
+links:
+  article: null
+assets:
+  thumbnail: assets/thumbnail.png
+  alt: "VS Code with Build with Agent chat: Session Zero onboarding for enterprise AI development"

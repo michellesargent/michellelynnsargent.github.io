@@ -1,0 +1,121 @@
+---
+interface Props {
+  columns?: number;
+  rows?: number;
+  dashed?: boolean;
+  class?: string;
+}
+
+const { columns = 1, rows = 1, dashed = false, class: className } = Astro.props;
+---
+
+<div
+  class:list={['geist-grid-system', { 'geist-grid-dashed': dashed }, className]}
+  style={`--geist-grid-cols: ${columns}; --geist-grid-rows: ${rows}`}
+>
+  <div class="geist-grid" aria-hidden="true">
+    <span class="geist-grid-cross geist-grid-cross-tl"></span>
+    <span class="geist-grid-cross geist-grid-cross-tr"></span>
+    <span class="geist-grid-cross geist-grid-cross-bl"></span>
+    <span class="geist-grid-cross geist-grid-cross-br"></span>
+  </div>
+  <div class="geist-grid-content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .geist-grid-system {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .geist-grid {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--geist-grid-cols), 1fr);
+    grid-template-rows: repeat(var(--geist-grid-rows), 1fr);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .geist-grid::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, var(--color-grid-border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-grid-border) 1px, transparent 1px);
+    background-size: calc(100% / var(--geist-grid-cols)) calc(100% / var(--geist-grid-rows));
+  }
+
+  .geist-grid-dashed .geist-grid::before {
+    background-image:
+      linear-gradient(to right, var(--color-grid-border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-grid-border) 1px, transparent 1px);
+    background-size: calc(100% / var(--geist-grid-cols)) calc(100% / var(--geist-grid-rows));
+    opacity: 0.85;
+    mask-image: repeating-linear-gradient(
+        90deg,
+        #000 0,
+        #000 6px,
+        transparent 6px,
+        transparent 10px
+      ),
+      repeating-linear-gradient(0deg, #000 0, #000 6px, transparent 6px, transparent 10px);
+  }
+
+  .geist-grid-cross {
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    color: var(--color-grid-border);
+  }
+
+  .geist-grid-cross::before,
+  .geist-grid-cross::after {
+    content: '';
+    position: absolute;
+    background: currentColor;
+  }
+
+  .geist-grid-cross::before {
+    top: 8px;
+    left: 0;
+    right: 0;
+    height: 1px;
+  }
+
+  .geist-grid-cross::after {
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+  }
+
+  .geist-grid-cross-tl {
+    top: -8px;
+    left: -8px;
+  }
+
+  .geist-grid-cross-tr {
+    top: -8px;
+    right: -8px;
+  }
+
+  .geist-grid-cross-bl {
+    bottom: -8px;
+    left: -8px;
+  }
+
+  .geist-grid-cross-br {
+    bottom: -8px;
+    right: -8px;
+  }
+
+  .geist-grid-content {
+    position: relative;
+    z-index: 1;
+  }
+</style>

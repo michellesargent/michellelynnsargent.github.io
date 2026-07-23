@@ -1,0 +1,257 @@
+# Master catalog for portfolio work. Agents should read this before building pages.
+# See work/README.md for folder conventions.
+
+case_studies:
+  - slug: uxep-platform
+    title: UX Enablement Platform
+    status: draft
+    featured: true
+    listed: false
+    priority: 1
+    date_start: "2026-02"
+    date_end: "2026-05"
+    visibility: internal
+    organization: Cisco
+    role: Senior Product Designer
+    themes:
+      - design-engineer
+      - ux-engineer
+      - enterprise-systems
+    proof:
+      - type: shipped
+        label: Production launch May 18, 2026
+      - type: repo
+        label: cisco-it-design/uxep-site
+    feeds_from:
+      - supporting/metrics-and-analytics
+      - supporting/enablement-workshops
+
+  - slug: ai-native-developer-pack
+    title: AI-Native Developer Pack
+    status: draft
+    featured: true
+    listed: false
+    priority: 2
+    date_start: "2026-06"
+    date_end: "2026-07"
+    visibility: internal
+    organization: Cisco
+    role: Senior Product Designer
+    themes:
+      - design-technologist
+      - design-engineer
+      - enterprise-systems
+    proof:
+      - type: poc
+        label: Five-day POC; 8 PRs authored, 18 reviewed
+      - type: repo
+        label: cisco-it-design/ai-native-developer-pack
+    feeds_from:
+      - supporting/testimonials
+
+  - slug: ai-design-workflow
+    title: AI Design Workflow
+    status: draft
+    featured: false
+    priority: 3
+    date_start: "2025-12"
+    date_end: null
+    visibility: internal
+    organization: Cisco
+    role: Design Engineer
+    themes:
+      - design-engineer
+      - ai-native-workflow
+    feeds_from:
+      - supporting/enablement-workshops
+      - supporting/testimonials
+
+  - slug: design-system-theming
+    title: Design System Engineering
+    status: draft
+    featured: false
+    priority: 4
+    date_start: "2025-11"
+    date_end: "2026-04"
+    visibility: internal
+    organization: Cisco
+    role: Design Engineer
+    themes:
+      - ux-engineer
+      - enterprise-systems
+    proof:
+      - type: release
+        label: Atmosphere v4 OCDL theming; Michelle — 12 PRs authored / 30 reviewed on atmosphere
+      - type: repo
+        label: UXEP — Michelle; 29 authored / 30 reviewed on uxep-site
+    feeds_from: []
+
+  - slug: portfolio-site
+    title: Portfolio Site
+    status: draft
+    featured: false
+    listed: false
+    priority: 5
+    date_start: "2026-07"
+    date_end: null
+    visibility: internal
+    organization: Personal
+    role: Design Engineer
+    themes:
+      - design-engineer
+      - ai-native-workflow
+    proof:
+      - type: shipped
+        label: Password-protected GitHub Pages deploy
+      - type: repo
+        label: michellelynnsargent.github.io
+    feeds_from:
+      - articles/beyond-the-vibes-design-portfolio
+
+drafts:
+  - slug: uxep-v2
+    title: UXEP v2
+    status: in-progress
+    visibility: internal
+    promote_to: uxep-platform
+    notes: IA synthesis, Pencil.dev + Cursor mid-fi prototypes; promote when PO accepts ideal state
+
+  - slug: insights-center
+    title: Insights Center (Rhodonite)
+    status: draft
+    visibility: internal
+    promote_to: design-system-theming
+    notes: 27 PRs for v7 release; pre-UXEP era; confirm NDA before publishing
+
+  - slug: project-snowblower
+    title: Project Snowblower (CRS)
+    status: draft
+    visibility: internal
+    promote_to: null
+    notes: ServiceNow vulnerability management UX; anonymize before any public use
+
+  - slug: portfolio-site
+    title: Portfolio Site
+    status: in-progress
+    visibility: internal
+    promote_to: null
+    notes: "Promoted to case-studies/portfolio-site: meta case study for the live site"
+
+articles:
+  - slug: session-zero-ai-development-foundation
+    title: "Session Zero: AI Development Foundations for First-Time IDE Users"
+    status: draft
+    featured: true
+    date: "2026-04-29"
+    visibility: public
+    organization: Cisco
+    role: Session co-designer / presenter
+    themes:
+      - teaching
+      - onboarding
+      - github-copilot
+      - vscode
+    used_by:
+      - case-studies/ai-design-workflow
+      - articles/researchers-meet-github-copilot
+      - articles/ai-journey-map-pipeline
+    source: Session-0 Getting Started deck (Apr 2026, internal reference)
+    thumbnail: articles/session-zero-ai-development-foundation/assets/thumbnail.png
+
+  - slug: ai-journey-map-pipeline
+    title: "From Transcripts to Miro: A Human-in-the-Loop AI Journey Map Pipeline"
+    status: draft
+    featured: true
+    date: "2026-06-23"
+    visibility: public
+    organization: Cisco
+    role: Workshop facilitator / pipeline author
+    themes:
+      - teaching
+      - ai-native-workflow
+      - human-in-the-loop
+    used_by:
+      - case-studies/ai-design-workflow
+    source: Workshop VTT transcript (Jun 2026)
+    thumbnail: articles/ai-journey-map-pipeline/assets/thumbnail.png
+
+  - slug: beyond-figma-make-version-control
+    title: "Going Beyond Figma Make: Version Control and Sharing for AI Prototypes"
+    status: draft
+    featured: false
+    date: "2026-02-06"
+    visibility: public
+    organization: Cisco
+    role: Shop Talk presenter
+    themes:
+      - teaching
+      - figma-make
+      - version-control
+    used_by:
+      - case-studies/ai-design-workflow
+    source: Shop Talk VTT transcript (Feb 2026)
+    thumbnail: articles/beyond-figma-make-version-control/assets/thumbnail.png
+
+  - slug: researchers-meet-github-copilot
+    title: "Researchers, Meet GitHub Copilot: Scaling Research Synthesis with Grounded AI"
+    status: draft
+    featured: true
+    date: "2026-03-06"
+    visibility: public
+    organization: Cisco
+    role: Workshop co-designer / facilitator
+    themes:
+      - teaching
+      - ux-research
+      - spec-driven-development
+    used_by:
+      - case-studies/ai-design-workflow
+    source: LinkedIn article (Mar 2026)
+    links:
+      linkedin: https://www.linkedin.com/pulse/researchers-meet-github-copilot-building-workshop-scale-sargent-t1qbc/
+    thumbnail: articles/researchers-meet-github-copilot/assets/thumbnail.png
+
+  - slug: beyond-the-vibes-design-portfolio
+    title: "Beyond the Vibes: Owning Your Design Portfolio"
+    status: draft
+    featured: false
+    date: "2025-07"
+    visibility: public
+    organization: Cisco
+    role: dzone NYC organizer / workshop presenter
+    themes:
+      - teaching
+      - portfolio
+      - design-engineer
+    used_by:
+      - case-studies/portfolio-site
+    source: LinkedIn post (dzone 2025 NYC)
+    links:
+      linkedin: https://www.linkedin.com/feed/update/urn:li:activity:7384241189971025920/
+    thumbnail: articles/beyond-the-vibes-design-portfolio/assets/thumbnail.png
+
+supporting:
+  - slug: enablement-workshops
+    used_by:
+      - uxep-platform
+      - ai-design-workflow
+    contents:
+      - UXR GitHub Copilot workshops
+      - AI Journey Map Pipeline
+      - ShopTalk and CTRL+ALT+Design materials
+      - Cross-org CDSI demos
+
+  - slug: metrics-and-analytics
+    used_by:
+      - uxep-platform
+    contents:
+      - WARP metrics gap analysis
+      - Tagging and Adobe Analytics onboarding
+      - Data visualizations from raw exports
+
+  - slug: testimonials
+    used_by:
+      - ai-native-developer-pack
+      - ai-design-workflow
+    contents:
+      - Peer quotes and recognition (e.g. Qiwen on GitHub Copilot workshop)

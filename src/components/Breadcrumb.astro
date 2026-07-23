@@ -1,0 +1,232 @@
+---
+import type { BreadcrumbItem } from '../lib/breadcrumbs';
+
+interface Props {
+  items: BreadcrumbItem[];
+  type?: 'text' | 'menu';
+  class?: string;
+}
+
+const { items, type = 'text', class: className } = Astro.props;
+const lastIndex = items.length - 1;
+const middleItems = items.length > 2 ? items.slice(1, -1) : [];
+const showMenu = type === 'menu' && middleItems.length > 0;
+---
+
+<nav
+  class:list={['geist-breadcrumb', { 'geist-breadcrumb-menu-mode': showMenu }, className]}
+  aria-label="Breadcrumb"
+>
+  <ol class="geist-breadcrumb-list text-label-13">
+    {
+      items.map((item, index) => {
+        const isLast = index === lastIndex;
+        const isMiddle = index > 0 && index < lastIndex;
+
+        return (
+          <li
+            class:list={[
+              'geist-breadcrumb-item',
+              { 'is-active': item.active || isLast },
+              { 'is-disabled': item.disabled },
+              { 'geist-breadcrumb-middle': isMiddle },
+            ]}
+            data-menu-middle={isMiddle && showMenu ? 'true' : undefined}
+          >
+            {item.active || isLast || !item.href || item.disabled ? (
+              <span
+                class="geist-breadcrumb-label"
+                aria-current={item.active || isLast ? 'page' : undefined}
+              >
+                {item.label}
+              </span>
+            ) : (
+              <a class="geist-breadcrumb-link" href={item.href}>
+                {item.label}
+              </a>
+            )}
+            {index < lastIndex && (
+              <span class="geist-breadcrumb-separator" aria-hidden="true">
+                /
+              </span>
+            )}
+          </li>
+        );
+      })
+    }
+
+    {
+      showMenu && (
+        <li class="geist-breadcrumb-item geist-breadcrumb-menu-fallback">
+          <details class="geist-breadcrumb-details">
+            <summary class="geist-breadcrumb-menu-trigger" aria-label="Show path">
+              <span class="geist-breadcrumb-ellipsis" aria-hidden="true">
+                ···
+              </span>
+            </summary>
+            <ul class="geist-breadcrumb-menu-panel">
+              {middleItems.map((middle) => (
+                <li>
+                  {middle.disabled || !middle.href ? (
+                    <span
+                      class:list={[
+                        'geist-breadcrumb-label',
+                        { 'is-disabled': middle.disabled },
+                      ]}
+                    >
+                      {middle.label}
+                    </span>
+                  ) : (
+                    <a class="geist-breadcrumb-link" href={middle.href}>
+                      {middle.label}
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </details>
+          <span class="geist-breadcrumb-separator" aria-hidden="true">
+            /
+          </span>
+        </li>
+      )
+    }
+  </ol>
+</nav>
+
+<style>
+  .geist-breadcrumb {
+    margin: 0 0 var(--space-md);
+  }
+
+  .geist-breadcrumb-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: var(--color-text-muted);
+  }
+
+  .geist-breadcrumb-item {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .geist-breadcrumb-link,
+  .geist-breadcrumb-label {
+    display: inline-block;
+    max-width: 16rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-decoration: none;
+    color: inherit;
+    transition: color var(--motion-fast);
+  }
+
+  .geist-breadcrumb-link:hover {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .geist-breadcrumb-item.is-active .geist-breadcrumb-label {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .geist-breadcrumb-item.is-disabled .geist-breadcrumb-label {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .geist-breadcrumb-separator {
+    margin: 0 0.375rem;
+    color: var(--ds-gray-700);
+    user-select: none;
+  }
+
+  .geist-breadcrumb-menu-fallback {
+    display: none;
+  }
+
+  .geist-breadcrumb-details {
+    position: relative;
+  }
+
+  .geist-breadcrumb-menu-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.5rem;
+    padding: 0.125rem 0.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-base);
+    background: var(--color-bg-elevated);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .geist-breadcrumb-menu-trigger::-webkit-details-marker {
+    display: none;
+  }
+
+  .geist-breadcrumb-menu-trigger:hover {
+    color: var(--color-text);
+    border-color: var(--ds-gray-600);
+  }
+
+  .geist-breadcrumb-ellipsis {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    line-height: 1;
+  }
+
+  .geist-breadcrumb-menu-panel {
+    position: absolute;
+    top: calc(100% + 0.375rem);
+    left: 0;
+    z-index: 10;
+    min-width: 10rem;
+    margin: 0;
+    padding: 0.25rem;
+    list-style: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-base);
+    background: var(--color-bg-elevated);
+    box-shadow: var(--shadow-menu);
+  }
+
+  .geist-breadcrumb-menu-panel a,
+  .geist-breadcrumb-menu-panel .geist-breadcrumb-label {
+    display: block;
+    padding: 0.375rem 0.5rem;
+    border-radius: calc(var(--radius-base) - 2px);
+    max-width: none;
+  }
+
+  .geist-breadcrumb-menu-panel a:hover {
+    background: var(--ds-gray-200);
+    color: var(--color-text);
+  }
+
+  @media (max-width: 640px) {
+    .geist-breadcrumb-menu-mode .geist-breadcrumb-middle {
+      display: none;
+    }
+
+    .geist-breadcrumb-menu-mode .geist-breadcrumb-menu-fallback {
+      display: inline-flex;
+      order: 1;
+    }
+
+    .geist-breadcrumb-menu-mode .geist-breadcrumb-item:last-child {
+      order: 2;
+    }
+  }
+</style>

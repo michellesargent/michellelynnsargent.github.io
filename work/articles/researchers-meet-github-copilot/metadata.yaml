@@ -1,0 +1,36 @@
+title: "Researchers, Meet GitHub Copilot: Scaling Research Synthesis with Grounded AI"
+slug: researchers-meet-github-copilot
+featured: true
+visibility: public
+date: "2026-03-06"
+organization: Cisco
+role: Workshop co-designer / facilitator
+audience: UX researchers with no coding background
+tags:
+  - teaching
+  - github-copilot
+  - ux-research
+  - spec-driven-development
+  - ai-guardrails
+  - workshop-design
+portfolio_themes:
+  - design-engineer
+  - ai-native-workflow
+related_case_studies:
+  - ai-design-workflow
+related_supporting:
+  - enablement-workshops
+  - testimonials
+co_facilitators:
+  - Qiwen Zhao
+  - Victoria Tam
+related_articles:
+  - session-zero-ai-development-foundation
+source_material:
+  - LinkedIn article (Mar 2026)
+  - Session 0 deck (see session-zero-ai-development-foundation article)
+links:
+  linkedin: https://www.linkedin.com/pulse/researchers-meet-github-copilot-building-workshop-scale-sargent-t1qbc/
+assets:
+  thumbnail: assets/thumbnail.png
+  alt: "Research and GitHub Copilot icons: UX research synthesis with grounded AI"

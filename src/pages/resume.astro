@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ExperienceTimeline from '../components/sections/ExperienceTimeline.astro';
+import GeistTable from '../components/GeistTable.astro';
+import IconWrap from '../components/IconWrap.astro';
+import { RESUME } from '../lib/content/resume';
+import { SITE } from '../lib/site';
+---
+
+<BaseLayout
+  title="Resume"
+  description="Michelle Sargent: Design Engineer resume with enterprise UX, design systems, and AI-native workflow experience."
+>
+  <section class="container section resume-page">
+    <div class="resume-print-action">
+      <button class="button button-secondary" type="button" onclick="window.print()">
+        Print resume
+      </button>
+    </div>
+
+    <header class="resume-header">
+      <p class="section-eyebrow">Resume</p>
+      <h1>{SITE.title}</h1>
+      <p class="resume-tagline">{SITE.tagline} · {SITE.description}</p>
+      <div class="resume-links">
+        <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href={SITE.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </header>
+
+    <section class="resume-section">
+      <h2>Summary</h2>
+      <p>{RESUME.summary}</p>
+    </section>
+
+    <section class="resume-section">
+      <h2>Experience</h2>
+      <ExperienceTimeline entries={RESUME.experience} />
+    </section>
+
+    <section class="resume-section">
+      <h2>Skills</h2>
+      <div class="resume-skills">
+        {
+          RESUME.skills.map((group) => (
+            <div>
+              <IconWrap
+                name={group.icon}
+                size={20}
+                class="resume-skills-icon"
+                label={group.category}
+              />
+              <h3>{group.category}</h3>
+              <ul>
+                {group.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="resume-section">
+      <h2>Education</h2>
+      {
+        RESUME.education.map((entry) => (
+          <div class="resume-entry">
+            {entry.period && <p class="resume-entry-period">{entry.period}</p>}
+            <h3>
+              {entry.degree} · {entry.institution}
+            </h3>
+            {entry.detail && <p class="resume-entry-detail">{entry.detail}</p>}
+          </div>
+        ))
+      }
+    </section>
+
+    <section class="resume-section">
+      <h2>Certifications</h2>
+      <GeistTable caption="Professional certifications">
+        <thead>
+          <tr>
+            <th scope="col">Certification</th>
+            <th scope="col">Issuer</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            RESUME.certifications.map((entry) => (
+              <tr>
+                <td class="geist-table-primary">{entry.title}</td>
+                <td>{entry.issuer}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </GeistTable>
+    </section>
+  </section>
+</BaseLayout>
+
+<style>
+  .resume-section > p {
+    margin: 0;
+    color: var(--color-text-muted);
+    max-width: var(--max-prose);
+    line-height: 1.65;
+  }
+
+  .resume-skills :global(.resume-skills-icon) {
+    display: flex;
+    justify-content: flex-start;
+    align-self: flex-start;
+    margin-bottom: var(--space-sm);
+    color: var(--color-eyebrow);
+  }
+
+  .resume-skills :global(.resume-skills-icon svg) {
+    width: 20px;
+    height: 20px;
+  }
+</style>

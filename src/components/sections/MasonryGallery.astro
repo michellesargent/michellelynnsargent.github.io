@@ -1,0 +1,40 @@
+---
+import type { CaseStudy } from '../../lib/content/types';
+import { getThumbnailUrl } from '../../lib/content/thumbnails';
+
+interface Props {
+  items: CaseStudy[];
+  layout?: 'auto' | 'halves';
+}
+
+const { items, layout = 'auto' } = Astro.props;
+---
+
+<div class:list={['teaching-grid', layout === 'halves' && 'teaching-grid--halves']}>
+  {
+    items.map((study) => (
+      <a class="teaching-card material-menu" href={`/work/${study.slug}`}>
+        {
+          study.thumbnail ? (
+            <div class="teaching-card-media">
+              <img
+                src={getThumbnailUrl(study.thumbnail)}
+                alt={study.thumbnailAlt ?? study.title}
+                loading="lazy"
+              />
+            </div>
+          ) : (
+            <div class="teaching-card-media teaching-card-fallback">
+              <span>{study.title.slice(0, 1)}</span>
+            </div>
+          )
+        }
+        <div class="teaching-card-body">
+          <p class="teaching-card-date">{study.organization}</p>
+          <h3>{study.title}</h3>
+          <p>{study.excerpt}</p>
+        </div>
+      </a>
+    ))
+  }
+</div>

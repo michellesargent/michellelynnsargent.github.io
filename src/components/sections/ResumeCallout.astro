@@ -1,0 +1,72 @@
+---
+import GeistGrid from '../GeistGrid.astro';
+import IconWrap from '../IconWrap.astro';
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<GeistGrid columns={1} rows={1} class="resume-callout-wrap">
+  <div class="resume-callout-grid">
+    <div class="resume-callout-cell">
+      <p class="section-eyebrow text-label-13-pixel">Resume</p>
+      <h2>Full experience, one scannable page</h2>
+      <p>
+        Michelle's Design Engineer positioning with enterprise systems depth: roles, skills, and education
+        formatted for hiring managers and print.
+      </p>
+      <div class="button-row">
+        <a class="button button-primary" href="/resume">
+          <IconWrap name="file" size={16} />
+          View resume
+          <IconWrap name="arrow-right" size={16} />
+        </a>
+        {!compact && (
+          <a class="button button-secondary" href="/about">
+            <IconWrap name="user" size={16} />
+            About Michelle
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+</GeistGrid>
+
+<style>
+  .resume-callout-wrap {
+    margin-top: var(--space-md);
+  }
+
+  .resume-callout-wrap :global(.geist-grid-content) {
+    padding: var(--space-md);
+  }
+
+  .resume-callout-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-top: 1px solid var(--color-grid-border);
+    border-left: 1px solid var(--color-grid-border);
+  }
+
+  .resume-callout-cell {
+    padding: var(--space-lg) var(--space-xl);
+    border-right: 1px solid var(--color-grid-border);
+    border-bottom: 1px solid var(--color-grid-border);
+  }
+
+  .resume-callout-cell h2 {
+    margin: 0 0 var(--space-sm);
+    font-family: var(--font-sans);
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 600;
+  }
+
+  .resume-callout-cell p {
+    margin: 0 0 var(--space-lg);
+    color: var(--color-text-muted);
+    max-width: 42rem;
+  }
+</style>

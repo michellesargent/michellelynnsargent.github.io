@@ -1,0 +1,125 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import Prose from '../components/Prose.astro';
+import PhotoGallery from '../components/PhotoGallery.astro';
+import Tag from '../components/Tag.astro';
+import CiscoLink from '../components/CiscoLink.astro';
+import { teachingBreadcrumbs } from '../lib/breadcrumbs';
+import { SITE } from '../lib/site';
+import type { Article } from '../lib/content/types';
+
+interface Props {
+  article: Article;
+}
+
+const { article } = Astro.props;
+const { metadata } = article;
+const teachingTags = (metadata.tags ?? article.themes ?? []).filter((tag) =>
+  ['teaching', 'enablement', 'onboarding', 'workshop-design'].includes(tag),
+);
+---
+
+<BaseLayout title={article.title} description={article.excerpt}>
+  <article class="container section">
+    <Breadcrumb items={teachingBreadcrumbs({ label: article.title })} type="menu" />
+    <header class="detail-header">
+      <p class="hero-eyebrow">Teaching &amp; enablement</p>
+      <h1>{article.title}</h1>
+      <div class="detail-meta">
+        <span>{new Date(article.date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</span>
+        <span>{metadata.role ?? article.role}</span>
+        {(metadata.audience ?? article.audience) && <span>{metadata.audience ?? article.audience}</span>}
+      </div>
+      <div class="tag-list">
+        {teachingTags.length > 0
+          ? teachingTags.map((tag) => <Tag label={tag.replace(/-/g, ' ')} variant="accent" />)
+          : (metadata.tags ?? article.themes ?? []).map((tag) => (
+              <Tag label={tag.replace(/-/g, ' ')} variant="accent" />
+            ))}
+      </div>
+    </header>
+
+    {
+      metadata.links &&
+        Object.entries(metadata.links).filter(([, href]) => Boolean(href)).length > 0 && (
+        <section class="links-section">
+          <h2>Related links</h2>
+          <ul>
+            {Object.entries(metadata.links)
+              .filter(([, href]) => Boolean(href))
+              .map(([key, href]) => (
+              <li>
+                <CiscoLink href={href!} label={key === 'linkedin' ? 'LinkedIn article' : key} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <div class="article-body">
+      {
+        article.gallery.length > 0 && (
+          <PhotoGallery
+            images={article.gallery}
+            label="dzone NYC workshop photos"
+          />
+        )
+      }
+      <Prose html={article.bodyHtml} />
+    </div>
+
+    {
+      article.related.length > 0 && (
+        <section class="related-section">
+          <h2>Related</h2>
+          <ul>
+            {article.related.map((ref) => (
+              <li>
+                <a href={ref.href}>{ref.title}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <p class="contact-note">
+      Questions about this work? Connect on{' '}
+      <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>.
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-body {
+    max-width: var(--max-prose);
+  }
+
+  .links-section,
+  .related-section {
+    margin-bottom: var(--space-xl);
+    max-width: var(--max-prose);
+  }
+
+  .links-section h2,
+  .related-section h2 {
+    font-family: var(--font-sans);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 var(--space-md);
+  }
+
+  .links-section ul,
+  .related-section ul {
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+
+  .contact-note {
+    margin-top: var(--space-2xl);
+    color: var(--color-text-muted);
+    max-width: var(--max-prose);
+  }
+</style>

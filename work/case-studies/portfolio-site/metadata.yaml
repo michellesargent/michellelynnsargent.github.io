@@ -1,0 +1,27 @@
+title: Portfolio Site
+slug: portfolio-site
+featured: true
+visibility: internal
+date_start: "2026-07"
+date_end: null
+organization: Personal
+role: Design Engineer
+tags:
+  - portfolio
+  - astro
+  - design-engineer
+  - access-control
+links:
+  live: https://michellelynnsargent.github.io
+  repo: michellelynnsargent/michellelynnsargent.github.io
+portfolio_themes:
+  - design-engineer
+  - ai-native-workflow
+related_case_studies:
+  - ai-design-workflow
+related_articles:
+  - beyond-the-vibes-design-portfolio
+portfolio_angles:
+  - Design Engineer: designed, built, and shipped the portfolio itself
+  - AI-native workflow: OpenSpec-driven build with Cursor agents
+  - Teaching, content pipeline surfaces enablement articles as first-class routes

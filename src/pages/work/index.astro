@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import SectionHeader from '../../components/sections/SectionHeader.astro';
+import MasonryGallery from '../../components/sections/MasonryGallery.astro';
+import { workBreadcrumbs } from '../../lib/breadcrumbs';
+import { getAllCaseStudies } from '../../lib/content/loader';
+
+const caseStudies = getAllCaseStudies();
+---
+
+<BaseLayout title="Work" description="Case studies in enterprise UX, design systems, and AI-native delivery.">
+  <section class="container section">
+    <Breadcrumb items={workBreadcrumbs()} />
+    <SectionHeader
+      eyebrow="Work"
+      title="Case studies"
+      subtitle="Platform launches, design system engineering, and AI-native workflows: enterprise UX from IA through production."
+    />
+
+    {
+      caseStudies.length > 0 ? (
+        <MasonryGallery items={caseStudies} layout="halves" />
+      ) : (
+        <p>
+          Case studies coming soon. Browse <a href="/teaching">teaching articles</a> in the
+          meantime.
+        </p>
+      )
+    }
+  </section>
+</BaseLayout>

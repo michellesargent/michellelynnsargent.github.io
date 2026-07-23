@@ -1,0 +1,46 @@
+---
+import { CAPABILITIES } from '../../lib/content/capabilities';
+import GeistGrid from '../GeistGrid.astro';
+
+interface GridItem {
+  index: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  items?: GridItem[];
+}
+
+const { items = CAPABILITIES } = Astro.props;
+---
+
+<GeistGrid columns={1} rows={1} class="capability-grid-wrap">
+  <div class="capability-grid">
+    {
+      items.map((item) => (
+        <div class="capability-cell">
+          <div class="capability-cell-header">
+            <p class="capability-index">{item.index}</p>
+          </div>
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+        </div>
+      ))
+    }
+  </div>
+</GeistGrid>
+
+<style>
+  .capability-grid-wrap {
+    margin-top: var(--space-md);
+  }
+
+  .capability-grid-wrap :global(.geist-grid-content) {
+    padding: var(--space-md);
+  }
+
+  .capability-cell-header {
+    margin-bottom: var(--space-sm);
+  }
+</style>

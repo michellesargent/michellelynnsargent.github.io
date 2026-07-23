@@ -1,0 +1,138 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import PhotoGallery from '../components/PhotoGallery.astro';
+import Prose from '../components/Prose.astro';
+import Tag from '../components/Tag.astro';
+import CiscoLink from '../components/CiscoLink.astro';
+import { workBreadcrumbs } from '../lib/breadcrumbs';
+import type { CaseStudy } from '../lib/content/types';
+
+interface Props {
+  caseStudy: CaseStudy;
+}
+
+const { caseStudy } = Astro.props;
+const { metadata } = caseStudy;
+const timeline = [metadata.date_start, metadata.date_end ?? 'Present'].filter(Boolean).join(' – ');
+
+const galleryMarker = '<!-- photo-gallery -->';
+const hasGalleryMarker = caseStudy.bodyHtml.includes(galleryMarker);
+const [proseBeforeGallery = caseStudy.bodyHtml, proseAfterGallery = ''] = hasGalleryMarker
+  ? caseStudy.bodyHtml.split(galleryMarker)
+  : [caseStudy.bodyHtml, ''];
+---
+
+<BaseLayout title={caseStudy.title} description={caseStudy.excerpt}>
+  <article class="container section">
+    <Breadcrumb items={workBreadcrumbs({ label: caseStudy.title })} type="menu" />
+    <header class="detail-header">
+      <p class="hero-eyebrow">{metadata.organization ?? caseStudy.organization}</p>
+      <h1>{caseStudy.title}</h1>
+      <div class="detail-meta">
+        <span>{metadata.role ?? caseStudy.role}</span>
+        {timeline && <span>{timeline}</span>}
+      </div>
+      <div class="tag-list">
+        {(metadata.tags ?? caseStudy.themes ?? []).map((tag) => (
+          <Tag label={tag.replace(/-/g, ' ')} />
+        ))}
+      </div>
+    </header>
+
+    {
+      caseStudy.proof && caseStudy.proof.length > 0 && (
+        <section class="proof-section">
+          <h2>Proof</h2>
+          <ul>
+            {caseStudy.proof.map((item) => (
+              <li>
+                {item.href ? (
+                  <CiscoLink href={item.href} label={item.label} />
+                ) : item.label.includes('cisco-it-design') || item.label.includes('cisco.com') ? (
+                  <CiscoLink
+                    href={`https://github.com/${item.label}`}
+                    label={item.label}
+                  />
+                ) : (
+                  item.label
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      caseStudy.portfolioAngles.length > 0 && (
+        <section class="angles-section">
+          <h2>Portfolio angles</h2>
+          <ul>
+            {caseStudy.portfolioAngles.map((angle) => (
+              <li>{angle}</li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <div class="case-study-body">
+      {proseBeforeGallery.trim() && <Prose html={proseBeforeGallery} />}
+      {
+        caseStudy.gallery.length > 0 && (
+          <PhotoGallery
+            images={caseStudy.gallery}
+            label="Pencil and Figma prototyping explorations"
+          />
+        )
+      }
+      {proseAfterGallery.trim() && <Prose html={proseAfterGallery} />}
+    </div>
+
+    {
+      caseStudy.related.length > 0 && (
+        <section class="related-section">
+          <h2>Related</h2>
+          <ul>
+            {caseStudy.related.map((ref) => (
+              <li>
+                <a href={ref.href}>{ref.title}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </article>
+</BaseLayout>
+
+<style>
+  .case-study-body {
+    max-width: var(--max-prose);
+  }
+
+  .proof-section,
+  .angles-section,
+  .related-section {
+    margin-bottom: var(--space-xl);
+    max-width: var(--max-prose);
+  }
+
+  .proof-section h2,
+  .angles-section h2,
+  .related-section h2 {
+    font-family: var(--font-sans);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 var(--space-md);
+  }
+
+  .proof-section ul,
+  .angles-section ul,
+  .related-section ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--color-text-muted);
+  }
+</style>

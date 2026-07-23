@@ -1,0 +1,21 @@
+.text-type {
+  display: block;
+}
+
+.text-type__line {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.text-type__cursor {
+  margin-left: 0.125em;
+  flex-shrink: 0;
+  display: inline-block;
+  opacity: 1;
+}
+
+.text-type__cursor--hidden {
+  display: none;
+}

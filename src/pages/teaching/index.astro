@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import SectionHeader from '../../components/sections/SectionHeader.astro';
+import TeachingThumbnails from '../../components/sections/TeachingThumbnails.astro';
+import { teachingBreadcrumbs } from '../../lib/breadcrumbs';
+import { getAllArticles } from '../../lib/content/loader';
+
+const articles = getAllArticles();
+---
+
+<BaseLayout
+  title="Teaching"
+  description="Teaching articles and enablement narratives for designers and researchers adopting AI-native workflows."
+>
+  <section class="container section">
+    <Breadcrumb items={teachingBreadcrumbs()} />
+    <SectionHeader
+      eyebrow="Teaching"
+      title="Enablement that meets people where they are"
+      subtitle="Workshops, onboarding pipelines, and resources for designers and researchers adopting AI-native workflows: from first IDE session to spec-driven delivery."
+    />
+
+    {
+      articles.length > 0 ? (
+        <TeachingThumbnails articles={articles} />
+      ) : (
+        <p>No teaching articles published yet.</p>
+      )
+    }
+  </section>
+</BaseLayout>

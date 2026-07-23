@@ -1,0 +1,29 @@
+---
+import { classifyUrl } from '../lib/content/cisco-links';
+
+interface Props {
+  href: string;
+  label: string;
+}
+
+const { href, label } = Astro.props;
+const access = classifyUrl(href);
+---
+
+{
+  access === 'internal-ref' ? (
+    <span class="internal-ref">
+      {label}
+      <span class="access-label">Internal reference</span>
+    </span>
+  ) : access === 'cisco-sso-vpn' ? (
+    <a href={href} class="cisco-link" target="_blank" rel="noopener noreferrer">
+      {label}
+      <span class="access-badge">Requires Cisco SSO &amp; VPN</span>
+    </a>
+  ) : (
+    <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer">
+      {label}
+    </a>
+  )
+}

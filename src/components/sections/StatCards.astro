@@ -1,0 +1,21 @@
+---
+import { ABOUT_STATS } from '../../lib/content/resume';
+
+interface Props {
+  stats?: typeof ABOUT_STATS;
+}
+
+const { stats = ABOUT_STATS } = Astro.props;
+---
+
+<div class="stat-cards">
+  {
+    stats.map((stat) => (
+      <div class="stat-card">
+        <p class="stat-value">{stat.value}</p>
+        <p class="stat-label">{stat.label}</p>
+        <p class="stat-description">{stat.description}</p>
+      </div>
+    ))
+  }
+</div>

@@ -1,0 +1,29 @@
+title: "Going Beyond Figma Make: Version Control and Sharing for AI Prototypes"
+slug: beyond-figma-make-version-control
+featured: false
+visibility: public
+date: "2026-02-06"
+organization: Cisco
+role: Shop Talk presenter
+audience: Designers, developers, anyone exploring AI-generated prototypes
+tags:
+  - teaching
+  - figma-make
+  - version-control
+  - github
+  - vibe-coding
+  - design-engineering
+portfolio_themes:
+  - design-engineer
+  - ai-native-workflow
+related_case_studies:
+  - ai-design-workflow
+related_supporting:
+  - enablement-workshops
+source_material:
+  - Shop Talk VTT transcript (Feb 2026)
+links:
+  article: null
+assets:
+  thumbnail: assets/thumbnail.png
+  alt: "Figma and GitHub logos: version control and sharing for AI prototypes"
