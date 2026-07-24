@@ -22,10 +22,14 @@ export function getThumbnailUrl(absolutePath: string | null): string | null {
     // fall through to fallback behavior below
   }
 
-  // Fallback: try to locate '/work/' in the absolute path (preserve old behavior)
+  // Fallback: robust extraction of the path after '/work/<type>/'.
+  // This handles CI/workspace paths with duplicated segments.
   const normalized = absolutePath.replace(/\\/g, '/');
-  const workIndex = normalized.lastIndexOf('/work/');
-  if (workIndex === -1) return null;
+  // Match '.../work/<type>/<slug>/...'
+  const m = normalized.match(/\/work\/(case-studies|articles)\/(.*)$/);
+  if (m && m[1] && m[2]) {
+    return `/content-assets/${m[1]}/${m[2]}`;
+  }
 
-  return `/content-assets/${normalized.slice(workIndex + '/work/'.length)}`;
+  return null;
 }
