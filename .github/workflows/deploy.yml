@@ -25,10 +25,31 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      # Copy work assets into public before build (deterministic in CI)
+      - name: Copy work assets to public (CI)
+        run: |
+          node ./scripts/copy-work-assets.js
+
       - name: Build
         run: npm run build
         env:
           SITE_PASSWORD: ${{ secrets.SITE_PASSWORD }}
+
+      # Debug listing of generated public/content-assets and upload as artifact
+      - name: Show public/content-assets contents
+        run: |
+          echo "==== public directory ===="
+          ls -la public || true
+          echo "==== public/content-assets ===="
+          ls -la public/content-assets || true
+          echo "==== recursive listing (top 200 lines) ===="
+          ls -R public/content-assets | sed -n '1,200p' || true
+
+      - name: Upload public as artifact (debug)
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-debug
+          path: public
 
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
