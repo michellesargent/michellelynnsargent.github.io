@@ -13,13 +13,13 @@ The `work/` folder is the single source of truth for portfolio content:
 
 There is no application code in the repo today — only content, OpenSpec changes, and docs. The portfolio site must be built from scratch and become the primary proof artifact: designed, built, and shipped with craft.
 
-**Deployment constraints (resolved):** Michelle will replace her current portfolio at [michellelynnpenney.github.io](https://michellelynnpenney.github.io/) with a user GitHub Pages site at **`michellesargent.github.io`** or **`michellelynnsargent.github.io`** (repo root, `base: '/'`). All Cisco content is confidential, so the entire site requires **password protection**. Cisco property URLs require SSO and VPN — links must be labeled accordingly. Contact: **LinkedIn** (primary on About); **LinkedIn + GitHub** in the footer.
+**Deployment constraints (resolved):** Michelle will replace her current portfolio at [michellelynnpenney.github.io](https://michellelynnpenney.github.io/) with a user GitHub Pages site at **`michellesargent.github.io`** or **`michellesargent.github.io`** (repo root, `base: '/'`). All Cisco content is confidential, so the entire site requires **password protection**. Cisco property URLs require SSO and VPN — links must be labeled accordingly. Contact: **LinkedIn** (primary on About); **LinkedIn + GitHub** in the footer.
 
 ## Goals / Non-Goals
 
 **Goals:**
 
-- Ship a password-protected portfolio on GitHub user Pages at repo root (`michellesargent.github.io` or `michellelynnsargent.github.io`)
+- Ship a password-protected portfolio on GitHub user Pages at repo root (`michellesargent.github.io` or `michellesargent.github.io`)
 - Read all portfolio content from `work/` at build time — no duplicate content in the app
 - Include confidential Cisco case studies (`visibility: internal`) behind the site-wide password gate
 - Information architecture that surfaces case studies, teaching articles, and positioning clearly
@@ -199,7 +199,7 @@ portfolio/                    # repo root
 **Configuration:**
 - Repo name: `<username>.github.io` where `<username>` is `michellesargent` or `michellelynnsargent`
 - Astro `base: '/'` (user Pages serves at domain root — no `/portfolio/` prefix)
-- Astro `site`: `https://michellelynnsargent.github.io` or `https://michellesargent.github.io` (match chosen username)
+- Astro `site`: `https://michellesargent.github.io` or `https://michellesargent.github.io` (match chosen username)
 - `SITE_PASSWORD` stored as GitHub Actions **repository secret** — injected at build, never committed
 - Enable Pages with source: GitHub Actions
 - No custom domain for v1
@@ -233,7 +233,7 @@ portfolio/                    # repo root
 | Question | Decision |
 |----------|----------|
 | Custom domain | No — GitHub user Pages for v1 |
-| Pages URL | Root deploy: `michellesargent.github.io` or `michellelynnsargent.github.io` (replaces [michellelynnpenney.github.io](https://michellelynnpenney.github.io/)) |
+| Pages URL | Root deploy: `michellesargent.github.io` or `michellesargent.github.io` (replaces [michellelynnpenney.github.io](https://michellelynnpenney.github.io/)) |
 | Astro `base` | `/` (user Pages, not project subpath) |
 | Public case studies | Include all Cisco case studies behind password gate |
 | Contact (About) | LinkedIn primary |

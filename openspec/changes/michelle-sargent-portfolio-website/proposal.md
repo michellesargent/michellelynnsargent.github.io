@@ -14,7 +14,7 @@ This change is timely because the `work/` content layer is now populated (four c
 - Protect the entire site with a password gate — all Cisco portfolio content is confidential
 - Include `visibility: internal` case studies in the build (accessible only after authentication)
 - Classify Cisco property links with SSO/VPN access indicators; render internal URLs as non-clickable labels
-- Deploy to GitHub user Pages at root (`michellesargent.github.io` or `michellelynnsargent.github.io`), replacing current [michellelynnpenney.github.io](https://michellelynnpenney.github.io/)
+- Deploy to GitHub user Pages at root (`michellesargent.github.io` or `michellesargent.github.io`), replacing current [michellelynnpenney.github.io](https://michellelynnpenney.github.io/)
 - Contact via LinkedIn (About); footer includes LinkedIn and GitHub profile links (no email or contact form)
 - Promote `drafts/portfolio-site` to a published case study documenting the site as meta-proof
 - Add project context to `openspec/config.yaml` (stack, conventions, positioning)

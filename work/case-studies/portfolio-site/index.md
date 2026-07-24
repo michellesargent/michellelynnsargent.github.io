@@ -31,14 +31,14 @@ Case studies, teaching articles, and supporting evidence lived as markdown in a 
 
 ## Outcome
 
-- **Shipped:** Static site deployable to `michellelynnsargent.github.io` via GitHub Actions
+- **Shipped:** Static site deployable to `michellesargent.github.io` via GitHub Actions
 - **Content:** 5 case studies (including this meta case study), 6 teaching articles, about page with career timeline
 - **Access control:** Site-wide password gate, `noindex` meta, `robots.txt` disallow
 - **Teaching surfaced:** Session Zero onboarding article featured on home and writing index
 
 ## Proof
 
-- **Live URL:** https://michellelynnsargent.github.io (password-protected)
+- **Live URL:** https://michellesargent.github.io (password-protected)
 - **Repo:** This repository
 - **Articles:** Session Zero, Researchers Meet GitHub Copilot, AI Journey Map Pipeline, and more in `/writing`
 

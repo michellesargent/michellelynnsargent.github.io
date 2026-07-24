@@ -104,7 +104,7 @@ case_studies:
       - type: shipped
         label: Password-protected GitHub Pages deploy
       - type: repo
-        label: michellelynnsargent.github.io
+        label: michellesargent.github.io
     feeds_from:
       - articles/beyond-the-vibes-design-portfolio
 

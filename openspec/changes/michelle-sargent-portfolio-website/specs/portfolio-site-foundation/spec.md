@@ -48,7 +48,7 @@ The site SHALL deploy to GitHub Pages via a GitHub Actions workflow that builds 
 
 #### Scenario: User Pages at root
 
-- **WHEN** the repository is named `<username>.github.io` (e.g. `michellelynnsargent.github.io`)
+- **WHEN** the repository is named `<username>.github.io` (e.g. `michellesargent.github.io`)
 - **THEN** `astro.config.mjs` sets `base` to `'/'` and `site` to `https://<username>.github.io` so assets and internal links resolve at the domain root
 
 #### Scenario: Footer social links
