@@ -36,7 +36,7 @@ export default defineConfig({
   integrations: [react()],
   output: 'static',
   site: 'https://michellesargent.github.io',
-  base: '/',
+  base: '/content-assets/',
   redirects: writingRedirects,
   image: {
     service: { entrypoint: 'astro/assets/services/sharp' },
