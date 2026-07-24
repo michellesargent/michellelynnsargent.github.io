@@ -1,34 +1,26 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
-
 export function getThumbnailUrl(absolutePath: string | null): string | null {
   if (!absolutePath) return null;
+  const normalized = absolutePath.replace(/\\/g, '/');
 
-  // Prefer a relative path from the repository root; this avoids embedding
-  // CI/workspace-specific prefixes (e.g. /home/runner/work/repo/repo/...).
+  // Find the last '/work/<type>/' segment and capture what comes after it.
+  const m = normalized.match(/\/work\/(case-studies|articles)\/(.+)$/);
+  if (m && m[1] && m[2]) {
+    // m[1] is 'case-studies' or 'articles', m[2] is '<slug>/...'
+    // public assets are copied to /content-assets/<type>/<slug>/assets/...
+    return `/content-assets/${m[1]}/${m[2]}`;
+  }
+
+  // Fallback: if relative calculation works, prefer that stripped result
   try {
+    const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
     const rel = path.relative(repoRoot, absolutePath).replace(/\\/g, '/');
-
-    // If the asset is inside the repo and under the 'work/' directory,
-    // drop the leading 'work/' segment so the public URL is
-    // /content-assets/<type>/<slug>/assets/...
-    if (!rel.startsWith('..') && rel.includes('work/')) {
+    if (rel.includes('work/')) {
+      // take everything after the final 'work/' to be safe
       const afterWork = rel.split('work/').pop();
       if (afterWork) return `/content-assets/${afterWork}`;
     }
   } catch (e) {
-    // fall through to fallback behavior below
-  }
-
-  // Fallback: robust extraction of the path after '/work/<type>/'.
-  // This handles CI/workspace paths with duplicated segments.
-  const normalized = absolutePath.replace(/\\/g, '/');
-  // Match '.../work/<type>/<slug>/...'
-  const m = normalized.match(/\/work\/(case-studies|articles)\/(.*)$/);
-  if (m && m[1] && m[2]) {
-    return `/content-assets/${m[1]}/${m[2]}`;
+    // silent fallback to null
   }
 
   return null;
